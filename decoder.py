@@ -19,7 +19,7 @@ if not ENCRYPTION_KEY or not FIXED_IV:
 ENCRYPTION_KEY = ENCRYPTION_KEY.encode()
 FIXED_IV = binascii.unhexlify(FIXED_IV)
 
-def calculate_region(matrix_size):
+def calculate_region():
     start_x, start_y = 11, 12
     region_width, region_height = 22, 22
     return start_x, start_y, region_width, region_height
@@ -76,7 +76,7 @@ def decode_secret_message(image_path):
         qr_matrix = (straight_qrcode[0] < 128).astype(int)
         matrix_size = qr_matrix.shape[0]
         
-        start_x, start_y, region_width, region_height = calculate_region(matrix_size)
+        start_x, start_y, region_width, region_height = calculate_region()
         
         qr_matrix = apply_custom_mask(qr_matrix, start_x, start_y, region_width, region_height)
         secret_message = extract_secret_message(qr_matrix, start_x, start_y, region_width, region_height)
