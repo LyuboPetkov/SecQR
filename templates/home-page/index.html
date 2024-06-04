@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecQR</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='images/SecQR_logo.png') }}" rel="icon">
+</head>
+<body>
+    <h1>SecQR</h1>
+    <a href="{{ url_for('check_url') }}" class="button-like">Check QR code for dangerous URL</a>
+    <a href="{{ url_for('secret_message') }}" class="button-like">Encode or decode a secret message</a>
+    
+    <footer>
+        <a href="{{ url_for('about') }}" class="about-link">About</a>
+    </footer>
+</body>
+</html>

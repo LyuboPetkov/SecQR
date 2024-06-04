@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Encode a QR code</h1>
+<form action="{{ url_for('encode_data') }}" method="POST">
+    <div>
+        <label for="normal-message">Normal message:</label>
+        <input type="text" id="normal-message" name="normal-message" maxlength="84" required>
+    </div>
+    <div>
+        <label for="secret-message">Secret message:</label>
+        <input type="text" id="secret-message" name="secret-message" maxlength="57" required>
+    </div>
+    <div>
+        <button type="submit">Generate QR code</button>
+    </div>
+</form>
+{% endblock %}

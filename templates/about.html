@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About SecQR</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='images/SecQR_logo.png') }}" rel="icon">
+</head>
+<body>
+    <div class="about-content">
+        <h1>About SecQR</h1>
+        <p>SecQR is a web based application that lets you check QR codes for dangerous URLs
+            and send secret messages with QR codes. It supports image uploads and direct QR code
+            scanning.</p>
+        <p>To send a secret message via a QR code, simply encode your custom QR code with a normal
+            message and a secret message. Then the recipient can use SecQR to decode the normal message and the secret message.</p>
+        <p>The secret message remains hidden for any normal scanner, it can only be decoded using SecQR.
+            Even further, before being encoded intо the QR code, the secret message is encrypted,
+            providing maximum level of data confidentiality.
+            Note that there are some limitations - the normal message can be maximum 84 characters long and
+            the secret message can be maximum 57 characters long.</p>
+        <p>Enjoy SecQR!</p>
+    </div>
+    <a href="/redirect-to-home" class="button-like">Home</a>
+</body>
+</html>

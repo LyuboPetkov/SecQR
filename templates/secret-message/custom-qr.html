@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Here is the custom QR code with embedded secret message</h1>
+<img src="{{ url_for('static', filename='images/modified_qr.png')}}" alt="Image of a QR code" class="responsive-img">
+{% endblock %}

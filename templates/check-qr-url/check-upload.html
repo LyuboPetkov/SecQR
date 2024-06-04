@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Upload an image</h1>
+<form action="{{ url_for('uploaded_image_check') }}" method="POST" enctype="multipart/form-data">
+    <div>
+        <label for="file">Choose an image to upload:</label>
+        <br>
+        <input type="file" id="file" name="file" accept="image/*" required>
+    </div>
+    <div>
+        <button type="submit">Check QR code</button>
+    </div>
+</form>
+{% endblock %}

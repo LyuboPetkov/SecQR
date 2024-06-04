@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>URL not found</h1>
+    <p>No URL found in the QR code. Scan another QR code or upload an image.</p>
+    <p>Decoded data: {{ decoded_data }}</p>
+    <a href="{{ url_for('scan_qr') }}" class="button-like">Scan a QR code</a>
+    <a href="{{ url_for('upload_qr') }}" class="button-like">Upload an image</a>
+{% endblock %}

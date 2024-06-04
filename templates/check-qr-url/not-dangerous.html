@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>URL not dangerous</h1>
+    <p>The URL is not dangerous: {{ url }}</p>
+    <a href="{{ url }}" class="button-like">Visit the URL</a>
+    <a href="{{ url_for('scan_qr') }}" class="button-like">Scan a QR code</a>
+    <a href="{{ url_for('upload_qr') }}" class="button-like">Upload an image</a>
+{% endblock %}

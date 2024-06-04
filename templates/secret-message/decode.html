@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Decode a secret message from a QR code</h1>
+<a href="{{ url_for('scan_secret_message') }}" class="button-like">Scan a QR code</a>
+<a href="{{ url_for('decode_upload_image') }}" class="button-like">Upload an image</a>
+{% endblock %}

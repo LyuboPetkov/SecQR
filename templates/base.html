@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecQR</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='images/SecQR_logo.png') }}" rel="icon">
+</head>
+<body>
+    {% block content %}{% endblock %}
+    <a href="/redirect-to-home" class="button-like">Home</a>
+</body>
+</html>

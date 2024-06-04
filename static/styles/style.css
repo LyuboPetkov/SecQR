@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 1.5rem;
+    background-color: #333;
+    color: whitesmoke;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    font-size: 1rem;
+}
+
+h1, p {
+    font-size: 2rem;
+    text-align: center;
+}
+
+input, button, a.button-like {
+    font-size: 1.2rem;
+    padding: 0.8rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1rem;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+button, a.button-like {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+button:hover, a.button-like:hover {
+    background-color: darkgrey;
+    cursor: pointer;
+}
+
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #fff;
+}
+
+#normal-message, #secret-message {
+    color: black;
+}
+
+.qr-reader {
+    width: 80vw;
+    height: 80vw;
+    max-width: 400px;
+    max-height: 400px;
+    margin: 0 auto;
+    border: 1px solid whitesmoke;
+    position: relative;
+}
+
+.qr-reader video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+footer {
+    margin-top: auto;
+    margin-bottom: 3rem;
+    padding: 1rem;
+}
+
+.about-link {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.about-link:hover {
+    text-decoration: underline;
+    color: darkgrey;
+}
+
+.about-content {
+    max-width: 600px;
+    padding: 1rem;
+    margin: 0 auto;
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.about-content h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.about-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.about-content a.button-like {
+    max-width: 200px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+    body {
+        font-size: 0.9rem;
+        padding: 1rem;
+    }
+
+    h1, p {
+        font-size: 1.8rem;
+    }
+
+    input, button, a.button-like {
+        font-size: 1rem;
+        padding: 0.8rem;
+        max-width: 100%;
+    }
+
+    .qr-reader {
+        width: 90vw;
+        height: 90vw;
+    }
+
+    .about-content {
+        font-size: 0.9rem;
+    }
+}
