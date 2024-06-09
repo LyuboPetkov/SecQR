@@ -7,6 +7,12 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+def decode_qr_code(image_path):
+    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    detector = cv2.QRCodeDetector()
+    data, _, _ = detector.detectAndDecode(img)
+    return data
+
 def is_valid_url(url):
     regex = re.compile(
         r'^(?:http|ftp)s?://'  # http:// or https://
@@ -17,12 +23,6 @@ def is_valid_url(url):
         r'(?::\d+)?'  # optional port
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
     return re.match(regex, url) is not None
-
-def decode_qr_code(image_path):
-    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-    detector = cv2.QRCodeDetector()
-    data, _, _ = detector.detectAndDecode(img)
-    return data
 
 def check_url_safety(url):
     google_api_key = os.getenv("GOOGLE_API_KEY")
