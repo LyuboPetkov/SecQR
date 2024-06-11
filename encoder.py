@@ -33,7 +33,7 @@ def create_qr_v8(data):
 def get_qr_matrix(qr):
     return np.array(qr.get_matrix())
 
-def calculate_region(matrix_size):
+def calculate_region():
     start_x, start_y = 15, 16
     region_width, region_height = 22, 22
     return start_x, start_y, region_width, region_height
@@ -84,8 +84,7 @@ def create_custom_qr(normal_message, secret_message):
     qr = create_qr_v8(normal_message)
     qr_matrix = get_qr_matrix(qr)
 
-    matrix_size = len(qr_matrix)
-    start_x, start_y, region_width, region_height = calculate_region(matrix_size)
+    start_x, start_y, region_width, region_height = calculate_region()
 
     try:
         qr_matrix = embed_secret_message(qr_matrix, secret_message, start_x, start_y, region_width, region_height)
@@ -99,3 +98,13 @@ def create_custom_qr(normal_message, secret_message):
     save_qr_matrix(qr_matrix, modified_qr_image_path)
     print(f"Modified QR code saved to {modified_qr_image_path}")
     return modified_qr_image_path
+
+if __name__ == "__main__":
+    normal_message = "This is a normal message."
+    secret_message = "This is a secret message."
+    
+    result = create_custom_qr(normal_message, secret_message)
+    if result:
+        print("QR code created successfully!")
+    else:
+        print("Failed to create QR code.")

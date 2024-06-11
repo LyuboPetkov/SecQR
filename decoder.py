@@ -1,4 +1,3 @@
-
 import os
 import binascii
 import cv2
@@ -74,7 +73,6 @@ def decode_secret_message(image_path):
             return "n!Sect33v||||???~~a122s0m,./"
 
         qr_matrix = (straight_qrcode[0] < 128).astype(int)
-        matrix_size = qr_matrix.shape[0]
         
         start_x, start_y, region_width, region_height = calculate_region()
         
@@ -92,3 +90,10 @@ def decode_qr(image_path):
         secret_message = ""
         
     return normal_message, secret_message
+
+if __name__ == "__main__":
+    image_path = "/modified_qr.png"
+    normal_message, secret_message = decode_qr(image_path)
+    
+    print(f"Normal message: {normal_message}")
+    print(f"Secret message: {secret_message}")
