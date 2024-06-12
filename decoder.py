@@ -68,7 +68,7 @@ def decode_secret_message(image_path):
     try:
         img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
         detector = cv2.QRCodeDetector()
-        retval, decoded_info, points, straight_qrcode = detector.detectAndDecodeMulti(img)
+        retval, _, _, straight_qrcode = detector.detectAndDecodeMulti(img)
         if not retval or len(straight_qrcode) == 0:
             return "n!Sect33v||||???~~a122s0m,./"
 
