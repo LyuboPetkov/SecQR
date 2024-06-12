@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', 'uploads/')
-ALLOWED_EXTENSIONS = set(os.getenv('ALLOWED_EXTENSIONS', 'png,jpg,jpeg,gif').split(','))
+ALLOWED_EXTENSIONS = set(os.getenv('ALLOWED_EXTENSIONS', 'png,jpg,jpeg').split(','))
 
 def init_app(app):
     app.secret_key = os.getenv('SECRET_KEY')
