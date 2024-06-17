@@ -90,3 +90,9 @@ def check_qr_url(filepath):
     
     result, checked_url = check_url_safety(url)
     return result, checked_url
+
+if __name__ == "__main__":
+    filepath = "check_url_qr.png"
+    result, checked_url = check_qr_url(filepath)
+    print(f"Result: {result}")
+    print(f"Checked URL: {checked_url}")
