@@ -5,12 +5,12 @@
 {% if session.format == 'png' %}
     <img src="{{ url_for('static', filename='images/modified_qr.png')}}" alt="Image of a QR code" class="responsive-img">
     <div>
-        <a href="{{ url_for('static', filename='images/modified_qr.png') }}" download="modified_qr.png">Download PNG</a>
+        <a href="{{ url_for('static', filename='images/modified_qr.png') }}" download="modified_qr.png" class="button-like">Download PNG</a>
     </div>
 {% elif session.format == 'svg' %}
     <img src="{{ url_for('static', filename='images/modified_qr.svg')}}" alt="Image of a QR code" class="responsive-img">
     <div>
-        <a href="{{ url_for('static', filename='images/modified_qr.svg') }}" download="modified_qr.svg">Download SVG</a>
+        <a href="{{ url_for('static', filename='images/modified_qr.svg') }}" download="modified_qr.svg" class="button-like">Download SVG</a>
     </div>
 {% endif %}
 {% endblock %}
