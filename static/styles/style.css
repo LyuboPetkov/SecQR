@@ -162,7 +162,7 @@ footer {
 /* Adjustments for smaller screens */
 @media (max-width: 600px) {
     .radio-group {
-        gap: 0.5rem;
+        gap: 0.3rem;
         justify-content: space-evenly;
     }
 
