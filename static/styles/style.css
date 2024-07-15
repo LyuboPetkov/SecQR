@@ -134,6 +134,42 @@ footer {
     transform: scale(1.2);
 }
 
+/* Add these styles to the end of your existing style.css */
+
+/* Styling for radio buttons */
+.radio-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap; /* Ensure proper wrapping on small screens */
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    white-space: nowrap; /* Prevent label wrapping */
+}
+
+.radio-group input[type="radio"] {
+    margin: 0;
+    transform: scale(1.2);
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 600px) {
+    .radio-group {
+        gap: 0.5rem;
+        justify-content: space-evenly;
+    }
+
+    .radio-group label {
+        font-size: 1rem;
+    }
+}
 
 /* Media query for smaller screens */
 @media (max-width: 600px) {
