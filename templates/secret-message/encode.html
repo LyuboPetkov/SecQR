@@ -11,6 +11,16 @@
         <label for="secret-message">Secret message:</label>
         <input type="text" id="secret-message" name="secret-message" maxlength="57" required>
     </div>
+    <div class="radio-group">
+        <label for="format-png">
+            <input type="radio" id="format-png" name="format" value="png" required>
+            PNG
+        </label>
+        <label for="format-svg">
+            <input type="radio" id="format-svg" name="format" value="svg">
+            SVG
+        </label>
+    </div>
     <div>
         <button type="submit">Generate QR code</button>
     </div>

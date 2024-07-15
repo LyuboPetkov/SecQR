@@ -125,6 +125,7 @@ def encode_qr():
 def encode_data():
     normal_message = request.form.get('normal-message')
     secret_message = request.form.get('secret-message')
+    format = request.form.get('format', 'png')  # Default to 'png' if no format is selected
 
     status_normal, _ = check_url_safety(normal_message)
     status_secret, _ = check_url_safety(secret_message)
@@ -132,8 +133,15 @@ def encode_data():
     if status_normal == "URL is dangerous" or status_secret == "URL is dangerous":
         return redirect(url_for('dangerous_data'))
 
-    create_custom_qr(normal_message, secret_message)
-    return redirect(url_for('custom_qr'))
+    file_path = create_custom_qr(normal_message, secret_message, format)
+    if file_path:
+        session['file_path'] = file_path
+        session['format'] = format  # Save the format to the session
+        return redirect(url_for('custom_qr'))
+    else:
+        return "Failed to create QR code", 500
+
+
 
 @app.route('/secret-message/encode/dangerous-data')
 def dangerous_data():

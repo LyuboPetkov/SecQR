@@ -6,6 +6,8 @@ from PIL import Image
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from dotenv import load_dotenv
+from xml.etree.ElementTree import Element, SubElement, tostring
+from xml.dom.minidom import parseString
 
 # Load environment variables from .env file
 load_dotenv()
@@ -65,7 +67,7 @@ def apply_custom_mask(qr_matrix, start_x, start_y, region_width, region_height):
             qr_matrix[start_y + i, start_x + j] ^= 1
     return qr_matrix
 
-def save_qr_matrix(qr_matrix, path, box_size=10, border=4):
+def save_qr_matrix_as_png(qr_matrix, path, box_size=10, border=4):
     matrix_size = len(qr_matrix)
     size = (matrix_size + border * 2) * box_size
     img = Image.new('1', (size, size), 1)
@@ -80,7 +82,36 @@ def save_qr_matrix(qr_matrix, path, box_size=10, border=4):
 
     img.save(path)
 
-def create_custom_qr(normal_message, secret_message):
+def save_qr_matrix_as_svg(qr_matrix, path, box_size=10, border=4):
+    matrix_size = len(qr_matrix)
+    size = (matrix_size + border * 2) * box_size
+
+    # Create the SVG root element
+    svg = Element('svg', width=str(size), height=str(size), xmlns="http://www.w3.org/2000/svg")
+    
+    # Create a white background
+    background = SubElement(svg, 'rect', width='100%', height='100%', fill='white')
+    
+    # Draw the QR matrix
+    for r in range(matrix_size):
+        for c in range(matrix_size):
+            if qr_matrix[r, c] == 1:
+                rect = SubElement(svg, 'rect', x=str((c + border) * box_size), y=str((r + border) * box_size), width=str(box_size), height=str(box_size), fill='black')
+    
+    # Convert the ElementTree to a string
+    svg_string = tostring(svg)
+    
+    # Save SVG to file
+    with open(path, 'wb') as f:
+        f.write(svg_string)
+    
+    # Optionally, pretty-print the SVG
+    dom = parseString(svg_string)
+    pretty_svg = dom.toprettyxml()
+    with open(path, 'w') as f:
+        f.write(pretty_svg)
+
+def create_custom_qr(normal_message, secret_message, format='png'):
     qr = create_qr_v8(normal_message)
     qr_matrix = get_qr_matrix(qr)
 
@@ -94,16 +125,21 @@ def create_custom_qr(normal_message, secret_message):
 
     qr_matrix = apply_custom_mask(qr_matrix, start_x, start_y, region_width, region_height)
 
-    modified_qr_image_path = "./static/images/modified_qr.png"
-    save_qr_matrix(qr_matrix, modified_qr_image_path)
-    print(f"Modified QR code saved to {modified_qr_image_path}")
-    return modified_qr_image_path
+    if format == 'png':
+        path = "./static/images/modified_qr.png"
+        save_qr_matrix_as_png(qr_matrix, path)
+    elif format == 'svg':
+        path = "./static/images/modified_qr.svg"
+        save_qr_matrix_as_svg(qr_matrix, path)
+    print(f"Modified QR code saved to {path}")
+    return path
 
 if __name__ == "__main__":
     normal_message = "This is a normal message."
     secret_message = "This is a secret message."
-    
-    result = create_custom_qr(normal_message, secret_message)
+    format = "png"  # or "svg"
+
+    result = create_custom_qr(normal_message, secret_message, format)
     if result:
         print("QR code created successfully!")
     else:

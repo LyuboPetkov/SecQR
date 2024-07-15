@@ -2,5 +2,15 @@
 
 {% block content %}
 <h1>Here is the custom QR code with embedded secret message</h1>
-<img src="{{ url_for('static', filename='images/modified_qr.png')}}" alt="Image of a QR code" class="responsive-img">
+{% if session.format == 'png' %}
+    <img src="{{ url_for('static', filename='images/modified_qr.png')}}" alt="Image of a QR code" class="responsive-img">
+    <div>
+        <a href="{{ url_for('static', filename='images/modified_qr.png') }}" download="modified_qr.png">Download PNG</a>
+    </div>
+{% elif session.format == 'svg' %}
+    <img src="{{ url_for('static', filename='images/modified_qr.svg')}}" alt="Image of a QR code" class="responsive-img">
+    <div>
+        <a href="{{ url_for('static', filename='images/modified_qr.svg') }}" download="modified_qr.svg">Download SVG</a>
+    </div>
+{% endif %}
 {% endblock %}
