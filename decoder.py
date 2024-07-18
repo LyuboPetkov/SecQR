@@ -57,9 +57,19 @@ def extract_secret_message(qr_matrix, start_x, start_y, region_width, region_hei
         return "n!Sect33v||||???~~a122s0m,./"
 
 def decode_qr_matrix(image_path):
-    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+    img = cv2.imread(image_path)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     detector = cv2.QRCodeDetector()
-    data, _, _ = detector.detectAndDecode(img)
+    data, points, _ = detector.detectAndDecode(gray)
+    
+    if points is not None:
+        points = points[0]
+        for i in range(len(points)):
+            cv2.line(img, tuple(points[i]), tuple(points[(i+1) % len(points)]), (0, 255, 0), 3)
+        cv2.imshow("QR code detected", img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+        
     if not data:
         return "n0!0kbnsqr,c0d||c3e.,?s"
     return data
