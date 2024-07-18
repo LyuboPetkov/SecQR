@@ -71,7 +71,7 @@ function restartScanner() {
         });
 }
 
-const config = { fps: 10, qrbox: { width: 150, height: 150 } };
+const config = { fps: 10, qrbox: { width: 200, height: 200 } };
 
 html5QrCode.start({ facingMode: "environment" }, config, onScanSuccess)
     .catch(err => {
