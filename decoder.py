@@ -56,17 +56,13 @@ def extract_secret_message(qr_matrix, start_x, start_y, region_width, region_hei
     except (IndexError, ValueError):
         return "n!Sect33v||||???~~a122s0m,./"
 
-def decode_qr_code(image_path):
+def decode_qr_matrix(image_path):
     img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
     detector = cv2.QRCodeDetector()
     data, _, _ = detector.detectAndDecode(img)
-    return data
-
-def decode_qr_matrix(image_path):
-    normal_message = decode_qr_code(image_path)
-    if not normal_message:
+    if not data:
         return "n0!0kbnsqr,c0d||c3e.,?s"
-    return normal_message
+    return data
 
 def decode_secret_message(image_path):
     try:
