@@ -23,7 +23,7 @@ The secret message remains hidden from standard scanners and is encrypted before
 
 Use the application at this link: https://secqr-vsp0.onrender.com/
 
-or
+or 
 
 Follow these steps to set up and run the application locally:
 
