@@ -223,6 +223,7 @@ def process_secret_scan():
         return response
     return jsonify({'message': 'Error processing the file', 'redirect': url_for('decode_qr_page')})
 
+# ########## RUN SERVER ##########
 if __name__ == "__main__":
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
