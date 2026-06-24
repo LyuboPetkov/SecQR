@@ -111,7 +111,7 @@ def save_qr_matrix_as_svg(qr_matrix, path, box_size=10, border=4):
     with open(path, 'w') as f:
         f.write(pretty_svg)
 
-def create_custom_qr(normal_message, secret_message, format='png'):
+def create_custom_qr(normal_message, secret_message, format='png', filename=None):
     qr = create_qr_v8(normal_message)
     qr_matrix = get_qr_matrix(qr)
 
@@ -125,12 +125,17 @@ def create_custom_qr(normal_message, secret_message, format='png'):
 
     qr_matrix = apply_custom_mask(qr_matrix, start_x, start_y, region_width, region_height)
 
+    if filename is None:
+        import uuid
+        filename = f"modified_qr_{uuid.uuid4().hex}"
+
     if format == 'png':
-        path = "./static/images/modified_qr.png"
+        path = f"./static/images/{filename}.png"
         save_qr_matrix_as_png(qr_matrix, path)
     elif format == 'svg':
-        path = "./static/images/modified_qr.svg"
+        path = f"./static/images/{filename}.svg"
         save_qr_matrix_as_svg(qr_matrix, path)
+
     print(f"Modified QR code saved to {path}")
     return path
 

@@ -92,8 +92,9 @@ def decode_qr(image_path):
     return normal_message, secret_message
 
 if __name__ == "__main__":
-    image_path = "/modified_qr.png"
-    normal_message, secret_message = decode_qr(image_path)
+    image_path = "static\images\modified_qr.png"
     
+    normal_message, secret_message = decode_qr(image_path)
     print(f"Normal message: {normal_message}")
     print(f"Secret message: {secret_message}")
+    

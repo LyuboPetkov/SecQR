@@ -5,6 +5,8 @@ from upload_image import upload_image, allowed_file
 from url_check import check_qr_url, check_url_safety
 from config import init_app
 import os
+import uuid
+import time
 from decoder import decode_qr
 
 app = Flask(__name__)
@@ -123,9 +125,10 @@ def encode_qr():
 
 @app.route('/secret-message/encode/custom-qr', methods=['POST'])
 def encode_data():
+    cleanup_old_qr_files()
     normal_message = request.form.get('normal-message')
     secret_message = request.form.get('secret-message')
-    format = request.form.get('format', 'png')  # Default to 'png' if no format is selected
+    format = request.form.get('format', 'png')
 
     status_normal, _ = check_url_safety(normal_message)
     status_secret, _ = check_url_safety(secret_message)
@@ -133,10 +136,20 @@ def encode_data():
     if status_normal == "URL is dangerous" or status_secret == "URL is dangerous":
         return redirect(url_for('dangerous_data'))
 
-    file_path = create_custom_qr(normal_message, secret_message, format)
+    # Clean up previous file for this session if it exists
+    old_file = session.get('file_path')
+    if old_file and os.path.exists(old_file):
+        os.remove(old_file)
+
+    # Generate unique filename
+    unique_filename = f"modified_qr_{uuid.uuid4().hex}"
+
+    file_path = create_custom_qr(normal_message, secret_message, format, filename=unique_filename)
+
     if file_path:
         session['file_path'] = file_path
-        session['format'] = format  # Save the format to the session
+        session['filename'] = unique_filename
+        session['format'] = format
         return redirect(url_for('custom_qr'))
     else:
         return "Failed to create QR code", 500
@@ -222,6 +235,19 @@ def process_secret_scan():
         print(f"Response: {response.get_json()}")
         return response
     return jsonify({'message': 'Error processing the file', 'redirect': url_for('decode_qr_page')})
+
+
+# Helper function to clean up old QR code files #
+
+def cleanup_old_qr_files(max_age_seconds=3600):
+    folder = "./static/images"
+    now = time.time()
+    for fname in os.listdir(folder):
+        if fname.startswith("modified_qr_"):
+            fpath = os.path.join(folder, fname)
+            if os.path.isfile(fpath) and (now - os.path.getmtime(fpath)) > max_age_seconds:
+                os.remove(fpath)
+                print(f"Cleaned up old QR file: {fname}")
 
 # ########## RUN SERVER ##########
 if __name__ == "__main__":
